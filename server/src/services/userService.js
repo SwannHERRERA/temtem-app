@@ -1,12 +1,14 @@
-const config = process.env;
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const config = process.env;
 
 async function authenticate({ email, password }) {
-  const user = User.findOne({
+  const user = await User.findOne({
     email: email.toString(),
   });
-  if (!user || !User.verify(email, password)) throw new Error('Username or password is incorrect');
+  if (!user) throw new Error('Username or password is incorrect');
+
+  User.verify(email, password)
 
   const token = jwt.sign({ sub: user.id }, config.JWTkey, { expiresIn: '7d' });
   
@@ -15,12 +17,8 @@ async function authenticate({ email, password }) {
     token,
   };
 }
-function register(body) {
-  
-}
 
 
 module.exports = {
   authenticate,
-  register,
 };

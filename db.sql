@@ -202,6 +202,7 @@ CREATE TABLE public."Temtem_x_user"
     def integer,
     speatk integer,
     spedef integer,
+    fert integer,
     PRIMARY KEY (id),
     CONSTRAINT "Tem_x_user_fkey_user" FOREIGN KEY(id_user) REFERENCES public."User"(id),
     CONSTRAINT "Tem_x_user_fkey_temtem" FOREIGN KEY(id_temtem) REFERENCES public."Temtem"(id)

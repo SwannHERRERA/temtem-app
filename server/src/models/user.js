@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const createGuts = require("../helpers/model-guts");
 
 const name = "User";
@@ -36,18 +36,17 @@ module.exports = (knex) => {
     const matchErrorMsg = "Username or password do not match";
 
     knex
-      .select()
+      .select('*')
       .from(tableName)
       .where({ email })
       .timeout(guts.timeout)
+      .first()
       .then((user) => {
         if (!user) throw matchErrorMsg;
 
         return user;
       })
-      .then((user) =>
-        Promise.all([user, verifyPassword(password, user.password)])
-      )
+      .then((user) => Promise.all([user, verifyPassword(password, user.password)]))
       .then(([user, isMatch]) => {
         if (!isMatch) throw matchErrorMsg;
 
