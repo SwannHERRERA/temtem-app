@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { authenticateJWT } = require('../middlewares/auth_middleware')
-const { add, update, remove, read, readAll } = require('../controllers/temtem')
+const { add, update, remove, read, readAll } = require('../controllers/map')
 const router = express.Router();
 
 router.get('/', authenticateJWT, readAll);

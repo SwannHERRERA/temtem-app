@@ -49,7 +49,7 @@ ALTER TABLE public."User"
 CREATE TABLE public."Group"
 (
     id serial NOT NULL,
-    nom character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT "Group_pkey" PRIMARY KEY (id)
 )
 
@@ -103,7 +103,8 @@ CREATE TABLE public."Temtem"
     id serial NOT NULL,
     type1 temtem_type NOT NULL,
     type2 temtem_type,
-    "Name" character varying COLLATE pg_catalog."default",
+    "Name" character varying COLLATE pg_catalog."default" NOT NULL,
+    "image" character varying,
     CONSTRAINT "Temtem_pkey" PRIMARY KEY (id)
 )
 
